@@ -1,0 +1,65 @@
+
+/* === space‑timeline.css =========================================
+   NASA‑inspired look for Knight Lab TimelineJS
+   Fonts:   Montserrat (700) for headlines, Lato (400/600) for body
+   Palette: Navy #0B3D91 | Gold #FFC857 | Gray #B0BECF | White #F3F5F9
+   =============================================================== */
+
+/* 1 — Import Google Fonts */
+@import url('https://fonts.googleapis.com/css2?family=Lato:wght@400;600&family=Montserrat:wght@700&display=swap');
+
+/* 2 — Base typography & colors */
+.tl-timeline{
+  font-family:"Lato",sans-serif;
+  color:#0B3D91;
+}
+
+h2.tl-headline,
+.tl-headline-date{
+  font-family:"Montserrat",sans-serif;
+  font-weight:700;
+  letter-spacing:0.3px;
+}
+
+.tl-headline-date{color:#B0BECF;}
+
+/* 3 — Slide text panels */
+.tl-slide .tl-text{
+  padding:1.2em 1.6em;
+  border-radius:12px;
+  box-shadow:0 4px 8px rgba(0,0,0,0.08);
+}
+
+/* Alternating backgrounds for readability */
+.tl-slide:nth-child(odd) .tl-text{background:#F3F5F9;}
+.tl-slide:nth-child(even) .tl-text{background:#ffffff;}
+
+/* Title slide gets a full‑bleed banner style */
+.tl-slide-titleslide .tl-text{
+  background:#0B3D91;
+  color:#FFC857;
+  text-align:center;
+}
+
+/* 4 — Timenav (the bottom scroller) */
+.tl-timenav{background:#0B3D91;}
+
+.tl-timemarker-content-container{
+  background:#FFC857;
+  color:#0B3D91;
+  border-radius:20px;
+  font-weight:600;
+}
+
+/* Highlight the active flag */
+.tl-timemarker.tl-timemarker-active .tl-timemarker-content-container{
+  box-shadow:0 0 0 3px #FFC857, 0 0 8px rgba(255,200,87,0.6);
+}
+
+/* 5 — Media caption & credit */
+.tl-caption{color:#6d7c90;font-size:0.85em;}
+
+/* 6 — Responsive tweaks */
+@media (max-width:600px){
+  .tl-slide .tl-text{padding:1em;}
+}
