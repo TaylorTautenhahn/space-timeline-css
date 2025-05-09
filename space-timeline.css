@@ -1,72 +1,85 @@
-/* === space‑timeline.css v2 ======================================
-   NASA‑inspired look for Knight Lab TimelineJS
-   Updated: Slide text & captions now in navy blue
+/* === space‑timeline.css v3 ======================================
+   Enhanced mission control theme with gradient banner,
+   hover effects, and coral highlights for TimelineJS
    =============================================================== */
 
 /* 1 — Import Google Fonts */
 @import url('https://fonts.googleapis.com/css2?family=Lato:wght@400;600&family=Montserrat:wght@700&display=swap');
 
-/* 2 — Base typography & colors */
-.tl-timeline {
-  font-family: "Lato", sans-serif;
-  /* this sets default link and text color */
-  color: #0B3D91;
+/* 2 — Color variables */
+:root {
+  --navy: #0B3D91;
+  --gold: #FFC857;
+  --gray: #B0BECF;
+  --light: #F3F5F9;
+  --highlight: #FF6F61;
 }
 
-/* Headlines & dates */
+/* 3 — Base typography */
+.tl-timeline {
+  font-family: "Lato", sans-serif;
+  color: var(--navy);
+}
 h2.tl-headline,
 .tl-headline-date {
   font-family: "Montserrat", sans-serif;
   font-weight: 700;
-  letter-spacing: 0.3px;
-  /* make dates a slightly lighter blue */
-  color: #34568B;
+  color: var(--navy);
+  letter-spacing: 0.5px;
 }
 
-/* 3 — Slide text panels */
-.tl-slide .tl-text {
-  padding: 1.2em 1.6em;
-  border-radius: 12px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.08);
-  /* force body text into navy blue */
-  color: #0B3D91 !important;
-  background-clip: padding-box;
-}
-
-/* Alternate panel backgrounds */
-.tl-slide:nth-child(odd) .tl-text { background: #F3F5F9; }
-.tl-slide:nth-child(even) .tl-text { background: #ffffff; }
-
-/* Title slide banner */
+/* 4 — Title slide gradient banner */
 .tl-slide-titleslide .tl-text {
-  background: #0B3D91;
-  color: #FFC857;
+  background: linear-gradient(135deg, var(--navy), var(--gold));
+  color: #ffffff;
   text-align: center;
 }
 
-/* 4 — Timenav (bottom scroller) */
-.tl-timenav { background: #0B3D91; }
+/* 5 — Slide cards */
+.tl-slide .tl-text {
+  background: #ffffff;
+  padding: 1.5em;
+  border-radius: 16px;
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+.tl-slide .tl-text:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 12px 20px rgba(0, 0, 0, 0.15);
+}
 
+/* 6 — Timenav bar */
+.tl-timenav {
+  background: var(--navy);
+  padding: 10px 0;
+}
 .tl-timemarker-content-container {
-  background: #FFC857;
-  color: #0B3D91;
-  border-radius: 20px;
+  background: var(--gold);
+  color: var(--navy);
+  border-radius: 6px;
   font-weight: 600;
+  transition: background 0.2s ease;
+}
+.tl-timemarker-content-container:hover {
+  background: var(--highlight);
 }
 
-/* Active flag highlight */
+/* Active marker */
 .tl-timemarker.tl-timemarker-active .tl-timemarker-content-container {
-  box-shadow: 0 0 0 3px #FFC857, 0 0 8px rgba(255, 200, 87, 0.6);
+  box-shadow: 0 0 0 4px var(--gold);
+  background: var(--highlight);
 }
 
-/* 5 — Captions & credits */
+/* 7 — Captions & credits */
 .tl-caption {
-  /* switch from gray to navy for consistency */
-  color: #0B3D91 !important;
+  color: var(--gray);
   font-size: 0.85em;
+  font-style: italic;
 }
 
-/* 6 — Responsive tweaks */
+/* 8 — Responsive tweaks */
 @media (max-width: 600px) {
-  .tl-slide .tl-text { padding: 1em; }
+  .tl-slide .tl-text {
+    padding: 1em;
+  }
 }
