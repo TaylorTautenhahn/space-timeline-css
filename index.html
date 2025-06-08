@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Shark Attack</title>
+<style>
+  body { margin:0; background:#0d6efd; overflow:hidden; }
+  canvas { background:#a6e3ff; display:block; margin:0 auto; }
+  #message { position:absolute; top:0; width:100%; text-align:center; color:white; font-size:24px; font-family:sans-serif; margin-top:20px; }
+</style>
+</head>
+<body>
+<div id="message"></div>
+<canvas id="gameCanvas" width="600" height="400"></canvas>
+<script>
+const canvas = document.getElementById('gameCanvas');
+const ctx = canvas.getContext('2d');
+let player = {x:50, y: canvas.height/2, size:20, speed:5};
+let sharks = [];
+let sharkSpeed = 2;
+let gameOver = false;
+function drawPlayer() {
+    ctx.fillStyle = 'orange';
+    ctx.beginPath();
+    ctx.arc(player.x, player.y, player.size, 0, Math.PI * 2);
+    ctx.fill();
+}
+function drawShark(shark) {
+    ctx.fillStyle = 'gray';
+    ctx.beginPath();
+    ctx.moveTo(shark.x, shark.y);
+    ctx.lineTo(shark.x - 40, shark.y - 20);
+    ctx.lineTo(shark.x - 40, shark.y + 20);
+    ctx.closePath();
+    ctx.fill();
+}
+function addShark() {
+    sharks.push({x: canvas.width + 40, y: Math.random()*canvas.height, size:20});
+}
+function update() {
+    if (Math.random() < 0.02) addShark();
+    sharks.forEach(s => { s.x -= sharkSpeed; });
+    sharks = sharks.filter(s => s.x > -40);
+}
+function checkCollisions() {
+    for (const s of sharks) {
+        const dx = s.x - player.x;
+        const dy = s.y - player.y;
+        const distance = Math.sqrt(dx*dx + dy*dy);
+        if (distance < player.size + s.size) {
+            gameOver = true;
+            document.getElementById('message').textContent = 'Game Over! Reload to try again.';
+        }
+    }
+}
+function draw() {
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+    drawPlayer();
+    sharks.forEach(drawShark);
+}
+function loop() {
+    if (gameOver) return;
+    update();
+    draw();
+    checkCollisions();
+    requestAnimationFrame(loop);
+}
+document.addEventListener('keydown', (e) => {
+    if (e.key === 'ArrowUp') player.y -= player.speed;
+    if (e.key === 'ArrowDown') player.y += player.speed;
+});
+loop();
+</script>
+</body>
+</html>
